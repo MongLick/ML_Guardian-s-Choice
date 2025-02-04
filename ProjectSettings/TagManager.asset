@@ -44,6 +44,6 @@ TagManager:
   - name: Ground
     uniqueID: 3679880171
     locked: 0
-  - name: Tower
+  - name: Castle
     uniqueID: 1207290535
     locked: 0
