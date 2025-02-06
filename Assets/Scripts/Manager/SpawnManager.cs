@@ -5,12 +5,14 @@ using UnityEngine.Tilemaps;
 
 public class SpawnManager : Singleton<SpawnManager>
 {
-	private HashSet<Vector2Int> placedTiles = new HashSet<Vector2Int>();
-	public HashSet<Vector2Int> PlacedTiles { get { return placedTiles; } }
+	private HashSet<Vector2Int> wayPlacedTiles = new HashSet<Vector2Int>();
+	public HashSet<Vector2Int> WayPlacedTiles { get { return wayPlacedTiles; } }
 
 	[Header("UnityAction")]
 	private UnityAction onStartEndTileSpawn;
 	public UnityAction OnStartEndTileSpawn { get { return onStartEndTileSpawn; } set { onStartEndTileSpawn = value; } }
+	private UnityAction onWayTileSpawn;
+	public UnityAction OnWayTileSpawn { get { return onWayTileSpawn; } set { onWayTileSpawn = value; } }
 
 	[Header("Components")]
 	[SerializeField] Tilemap tilemap;
@@ -19,8 +21,10 @@ public class SpawnManager : Singleton<SpawnManager>
 	public TileBase StartTile { get { return startTile; } }
 	[SerializeField] TileBase endTile;
 	public TileBase EndTile { get { return endTile; } }
-	[SerializeField] TileBase pathTile;
-	public TileBase PathTile { get { return pathTile; } }
+	[SerializeField] TileBase wayTile;
+	public TileBase WayTile { get { return wayTile; } }
+	[SerializeField] TileBase wallTile;
+	public TileBase WallTile { get { return wallTile; } }
 
 	[Header("Vector")]
 	[SerializeField] Vector3Int startPos;

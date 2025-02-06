@@ -47,6 +47,7 @@ MonoBehaviour:
   tilemap: {fileID: 0}
   startTile: {fileID: 11400000, guid: e12c41abd6542f346b7bea80a2dc0038, type: 2}
   endTile: {fileID: 11400000, guid: 64e79e80b7e859048ab4f6984b06fc72, type: 2}
-  pathTile: {fileID: 11400000, guid: 592d3c2ff3113fd4c9a12c3d271b0a6c, type: 2}
+  wayTile: {fileID: 11400000, guid: 33b2b46629df04e4089bdeca60fbf96a, type: 2}
+  wallTile: {fileID: 11400000, guid: 592d3c2ff3113fd4c9a12c3d271b0a6c, type: 2}
   startPos: {x: 0, y: 0, z: 0}
   endPos: {x: 0, y: 0, z: 0}

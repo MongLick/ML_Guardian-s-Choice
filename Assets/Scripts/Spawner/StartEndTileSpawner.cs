@@ -21,7 +21,7 @@ public class StartEndTileSpawner : MonoBehaviour
 		Manager.Spawn.Tilemap.SetTile(Manager.Spawn.StartPos, Manager.Spawn.StartTile);
 
 		int endY = Random.Range(randomMin, randomMax);
-		Manager.Spawn.EndPos = new Vector3Int(7, endY, tileZPos);
+		Manager.Spawn.EndPos = new Vector3Int(endXPos, endY, tileZPos);
 		Manager.Spawn.Tilemap.SetTile(Manager.Spawn.EndPos, Manager.Spawn.EndTile);
 
 		Manager.Spawn.OnStartEndTileSpawn?.Invoke();
