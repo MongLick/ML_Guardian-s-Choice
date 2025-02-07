@@ -64,7 +64,7 @@ public class WallTileSpawner : MonoBehaviour
 		Vector2Int randomPos = availablePositions[Random.Range(0, availablePositions.Count)];
 		Vector3Int tilePosition = new Vector3Int(randomPos.x, randomPos.y, Manager.Spawn.StartPos.z);
 
-		Manager.Spawn.Tilemap.SetTile(tilePosition, Manager.Spawn.WallTile);
+		Manager.Spawn.WallTilemap.SetTile(tilePosition, Manager.Spawn.WallTile);
 		Manager.Spawn.WayPlacedTiles.Add(randomPos);
 		availablePositions.Remove(randomPos);
 	}

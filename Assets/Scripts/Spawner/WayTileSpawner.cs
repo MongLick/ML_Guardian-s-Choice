@@ -33,7 +33,7 @@ public class WayTileSpawner : MonoBehaviour
 		{
 			if (currentPos != Manager.Spawn.StartPos && currentPos != Manager.Spawn.EndPos)
 			{
-				Manager.Spawn.Tilemap.SetTile(currentPos, Manager.Spawn.WayTile);
+				Manager.Spawn.FloorTilemap.SetTile(currentPos, Manager.Spawn.WayTile);
 			}
 
 			path.Add(currentPos);

@@ -15,8 +15,10 @@ public class SpawnManager : Singleton<SpawnManager>
 	public UnityAction OnWayTileSpawn { get { return onWayTileSpawn; } set { onWayTileSpawn = value; } }
 
 	[Header("Components")]
-	[SerializeField] Tilemap tilemap;
-	public Tilemap Tilemap { get { return tilemap; } }
+	[SerializeField] Tilemap floorTilemap;
+	public Tilemap FloorTilemap { get { return floorTilemap; } }
+	[SerializeField] Tilemap wallTilemap;
+	public Tilemap WallTilemap { get { return wallTilemap; } }
 	[SerializeField] TileBase startTile;
 	public TileBase StartTile { get { return startTile; } }
 	[SerializeField] TileBase endTile;
@@ -34,9 +36,15 @@ public class SpawnManager : Singleton<SpawnManager>
 
 	private void Start()
 	{
-		if (tilemap == null)
+		if (floorTilemap == null)
 		{
-			tilemap = FindObjectOfType<Tilemap>();
+			GameObject floorTile = GameObject.FindWithTag("Floor");
+			floorTilemap = floorTile.GetComponent<Tilemap>();
+		}
+		if (wallTilemap == null)
+		{
+			GameObject wallTile = GameObject.FindWithTag("Wall");
+			wallTilemap = wallTile.GetComponent<Tilemap>();
 		}
 	}
 }
