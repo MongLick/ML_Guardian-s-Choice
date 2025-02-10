@@ -49,3 +49,6 @@ TagManager:
   - name: Castle
     uniqueID: 1207290535
     locked: 0
+  - name: Monster
+    uniqueID: 3246621755
+    locked: 0
