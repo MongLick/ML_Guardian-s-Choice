@@ -7,23 +7,32 @@ public class MonsterController : MonoBehaviour
 
 	[Header("Components")]
 	[SerializeField] PathFinding pathFinding;
+	[SerializeField] Animator animator;
+	[SerializeField] PooledObject pooledObject;
+	[SerializeField] SpriteRenderer spriteRenderer;
 
 	[Header("Specs")]
+	[SerializeField] float health;
 	[SerializeField] float moveSpeed;
 	[SerializeField] float stopDist;
 	[SerializeField] int currentNodeIndex;
 	[SerializeField] bool isMoving;
 
-	public void GameStart()
+	private void OnEnable()
 	{
-		gameObject.transform.position = new Vector3(pathFinding.FinalNodeList[0].X, pathFinding.FinalNodeList[0].Y, 0);
+		spriteRenderer.color = Manager.Monster.MonsterColors[Manager.Game.GameRound -1];
+		health = health * Manager.Game.GameRound * 2;
+	}
+
+	private void Start()
+	{
+		pathFinding = Manager.Game.PathFinding;
 
 		path = pathFinding.FinalNodeList;
 
 		if (path != null && path.Count > 0)
 		{
 			isMoving = true;
-			MoveToNextNode();
 		}
 	}
 
@@ -38,7 +47,6 @@ public class MonsterController : MonoBehaviour
 	private void MoveAlongPath()
 	{
 		if (currentNodeIndex < path.Count)
-
 		{
 			Vector3 targetPosition = new Vector3(path[currentNodeIndex].X, path[currentNodeIndex].Y, 0);
 
@@ -49,15 +57,10 @@ public class MonsterController : MonoBehaviour
 				currentNodeIndex++;
 			}
 		}
-
 		else
 		{
-			isMoving = false; 
+			currentNodeIndex = 1;
+			pooledObject.Pool.ReturnPool(pooledObject);
 		}
-	}
-
-	private void MoveToNextNode()
-	{
-		currentNodeIndex = 0;
 	}
 }

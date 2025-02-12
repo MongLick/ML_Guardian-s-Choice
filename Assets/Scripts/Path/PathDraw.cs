@@ -6,6 +6,11 @@ public class PathDraw : MonoBehaviour
 	[SerializeField] PathFinding pathFinding;
 	[SerializeField] LineRenderer lineRenderer;
 
+	private void Start()
+	{
+		Manager.Game.PathDraw = this;
+	}
+
 	public void Drawing()
 	{
 		lineRenderer.positionCount = pathFinding.FinalNodeList.Count;

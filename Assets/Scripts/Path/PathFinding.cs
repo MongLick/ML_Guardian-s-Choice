@@ -24,6 +24,11 @@ public class PathFinding : MonoBehaviour
 	[SerializeField] int sizeX;
 	[SerializeField] int sizeY;
 
+	private void Start()
+	{
+		Manager.Game.PathFinding = this;
+	}
+
 	public void Finding()
 	{
 		finalNodeList = new List<Node>();
