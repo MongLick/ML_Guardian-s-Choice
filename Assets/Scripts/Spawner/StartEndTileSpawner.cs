@@ -17,13 +17,15 @@ public class StartEndTileSpawner : MonoBehaviour
 	private void StartEndTileSpawn()
 	{
 		int startY = Random.Range(randomMin, randomMax);
-		Manager.Spawn.StartPos = new Vector3Int(startXPos, startY, tileZPos);
-		Manager.Spawn.FloorTilemap.SetTile(Manager.Spawn.StartPos, Manager.Spawn.StartTile);
+		Manager.Tile.StartPos = new Vector3Int(startXPos, startY, tileZPos);
+		Manager.Tile.FloorTilemap.SetTile(Manager.Tile.StartPos, Manager.Tile.StartTile);
+		Instantiate(Manager.Tile.StartParticle, Manager.Tile.StartPos, Quaternion.identity); 
 
 		int endY = Random.Range(randomMin, randomMax);
-		Manager.Spawn.EndPos = new Vector3Int(endXPos, endY, tileZPos);
-		Manager.Spawn.FloorTilemap.SetTile(Manager.Spawn.EndPos, Manager.Spawn.EndTile);
+		Manager.Tile.EndPos = new Vector3Int(endXPos, endY, tileZPos);
+		Manager.Tile.FloorTilemap.SetTile(Manager.Tile.EndPos, Manager.Tile.EndTile);
+		Instantiate(Manager.Tile.EndParticle, Manager.Tile.EndPos, Quaternion.identity);
 
-		Manager.Spawn.OnStartEndTileSpawn?.Invoke();
+		Manager.Tile.OnStartEndTileSpawn?.Invoke();
 	}
 }

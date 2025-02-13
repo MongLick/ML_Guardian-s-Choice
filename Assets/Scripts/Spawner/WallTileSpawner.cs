@@ -13,12 +13,12 @@ public class WallTileSpawner : MonoBehaviour
 
 	private void OnEnable()
 	{
-		Manager.Spawn.OnWayTileSpawn += PlaceRandomTiles;
+		Manager.Tile.OnWayTileSpawn += PlaceRandomTiles;
 	}
 
 	private void OnDisable()
 	{
-		Manager.Spawn.OnWayTileSpawn -= PlaceRandomTiles;
+		Manager.Tile.OnWayTileSpawn -= PlaceRandomTiles;
 	}
 
 	private void PlaceRandomTiles()
@@ -47,9 +47,9 @@ public class WallTileSpawner : MonoBehaviour
 			{
 				Vector2Int currentPos = new Vector2Int(x, y);
 
-				if (currentPos != new Vector2Int(Manager.Spawn.StartPos.x, Manager.Spawn.StartPos.y) &&
-					currentPos != new Vector2Int(Manager.Spawn.EndPos.x, Manager.Spawn.EndPos.y) &&
-					!Manager.Spawn.WayPlacedTiles.Contains(currentPos))
+				if (currentPos != new Vector2Int(Manager.Tile.StartPos.x, Manager.Tile.StartPos.y) &&
+					currentPos != new Vector2Int(Manager.Tile.EndPos.x, Manager.Tile.EndPos.y) &&
+					!Manager.Tile.WayPlacedTiles.Contains(currentPos))
 				{
 					availablePositions.Add(currentPos);
 				}
@@ -62,10 +62,10 @@ public class WallTileSpawner : MonoBehaviour
 	private void PlaceTileAtRandomPosition(List<Vector2Int> availablePositions)
 	{
 		Vector2Int randomPos = availablePositions[Random.Range(0, availablePositions.Count)];
-		Vector3Int tilePosition = new Vector3Int(randomPos.x, randomPos.y, Manager.Spawn.StartPos.z);
+		Vector3Int tilePosition = new Vector3Int(randomPos.x, randomPos.y, Manager.Tile.StartPos.z);
 
-		Manager.Spawn.WallTilemap.SetTile(tilePosition, Manager.Spawn.WallTile);
-		Manager.Spawn.WayPlacedTiles.Add(randomPos);
+		Manager.Tile.WallTilemap.SetTile(tilePosition, Manager.Tile.WallTile);
+		Manager.Tile.WayPlacedTiles.Add(randomPos);
 		availablePositions.Remove(randomPos);
 	}
 }

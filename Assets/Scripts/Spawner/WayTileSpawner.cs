@@ -14,33 +14,33 @@ public class WayTileSpawner : MonoBehaviour
 
 	private void OnEnable()
 	{
-		Manager.Spawn.OnStartEndTileSpawn += CreateRandomWayTile;
+		Manager.Tile.OnStartEndTileSpawn += CreateRandomWayTile;
 	}
 
 	private void OnDisable()
 	{
-		Manager.Spawn.OnStartEndTileSpawn -= CreateRandomWayTile;
+		Manager.Tile.OnStartEndTileSpawn -= CreateRandomWayTile;
 	}
 
 	private void CreateRandomWayTile()
 	{
 		List<Vector3Int> path = new List<Vector3Int>();
-		Vector3Int currentPos = Manager.Spawn.StartPos;
+		Vector3Int currentPos = Manager.Tile.StartPos;
 
-		Manager.Spawn.WayPlacedTiles.Add(new Vector2Int(currentPos.x, currentPos.y));
+		Manager.Tile.WayPlacedTiles.Add(new Vector2Int(currentPos.x, currentPos.y));
 
-		while (currentPos != Manager.Spawn.EndPos)
+		while (currentPos != Manager.Tile.EndPos)
 		{
-			if (currentPos != Manager.Spawn.StartPos && currentPos != Manager.Spawn.EndPos)
+			if (currentPos != Manager.Tile.StartPos && currentPos != Manager.Tile.EndPos)
 			{
-				Manager.Spawn.FloorTilemap.SetTile(currentPos, Manager.Spawn.WayTile);
+				Manager.Tile.FloorTilemap.SetTile(currentPos, Manager.Tile.WayTile);
 			}
 
 			path.Add(currentPos);
 
-			if (IsAdjacent(currentPos, Manager.Spawn.EndPos))
+			if (IsAdjacent(currentPos, Manager.Tile.EndPos))
 			{
-				currentPos = Manager.Spawn.EndPos;
+				currentPos = Manager.Tile.EndPos;
 				path.Add(currentPos);
 				break;
 			}
@@ -49,12 +49,12 @@ public class WayTileSpawner : MonoBehaviour
 
 			currentPos = possibleMoves[Random.Range(0, possibleMoves.Count)];
 
-			Manager.Spawn.WayPlacedTiles.Add(new Vector2Int(currentPos.x, currentPos.y));
+			Manager.Tile.WayPlacedTiles.Add(new Vector2Int(currentPos.x, currentPos.y));
 		}
 
-		path.Add(Manager.Spawn.EndPos);
+		path.Add(Manager.Tile.EndPos);
 
-		Manager.Spawn.OnWayTileSpawn?.Invoke();
+		Manager.Tile.OnWayTileSpawn?.Invoke();
 	}
 
 	private List<Vector3Int> GetPossibleMoves(Vector3Int currentPos)
@@ -81,37 +81,37 @@ public class WayTileSpawner : MonoBehaviour
 			return false;
 		}
 
-		if (Manager.Spawn.WayPlacedTiles.Contains(new Vector2Int(newPos.x, newPos.y)))
+		if (Manager.Tile.WayPlacedTiles.Contains(new Vector2Int(newPos.x, newPos.y)))
 		{
 			return false;
 		}
 
-		if (currentPos.x == Manager.Spawn.EndPos.x - 1)
+		if (currentPos.x == Manager.Tile.EndPos.x - 1)
 		{
 			if (newPos.x > currentPos.x)
 			{
 				return true;
 			}
 
-			if (Manager.Spawn.EndPos.y > currentPos.y && newPos.y < currentPos.y)
+			if (Manager.Tile.EndPos.y > currentPos.y && newPos.y < currentPos.y)
 			{
 				return false;
 			}
 
-			if (Manager.Spawn.EndPos.y < currentPos.y && newPos.y > currentPos.y)
+			if (Manager.Tile.EndPos.y < currentPos.y && newPos.y > currentPos.y)
 			{
 				return false;
 			}
 		}
 
-		if (currentPos.x == Manager.Spawn.EndPos.x)
+		if (currentPos.x == Manager.Tile.EndPos.x)
 		{
-			if (Manager.Spawn.EndPos.y > currentPos.y && newPos.y < currentPos.y)
+			if (Manager.Tile.EndPos.y > currentPos.y && newPos.y < currentPos.y)
 			{
 				return false;
 			}
 
-			if (Manager.Spawn.EndPos.y < currentPos.y && newPos.y > currentPos.y)
+			if (Manager.Tile.EndPos.y < currentPos.y && newPos.y > currentPos.y)
 			{
 				return false;
 			}

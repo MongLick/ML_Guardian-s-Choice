@@ -20,13 +20,13 @@ public class MonsterController : MonoBehaviour
 
 	private void OnEnable()
 	{
-		spriteRenderer.color = Manager.Monster.MonsterColors[Manager.Game.GameRound -1];
+		spriteRenderer.color = Manager.Monster.MonsterColors[Manager.Game.GameRound];
 		health = health * Manager.Game.GameRound * 2;
 	}
 
 	private void Start()
 	{
-		pathFinding = Manager.Game.PathFinding;
+		pathFinding = Manager.Tile.PathFinding;
 
 		path = pathFinding.FinalNodeList;
 

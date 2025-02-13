@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1907056411180630784}
   - component: {fileID: 607855038865719645}
   m_Layer: 0
-  m_Name: SpawnManager
+  m_Name: TileManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,11 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6457c1194de5d78449901140121244b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathFinding: {fileID: 0}
+  pathDraw: {fileID: 0}
   floorTilemap: {fileID: 0}
   wallTilemap: {fileID: 0}
   startTile: {fileID: 11400000, guid: 3bcedea0c560e504b9fc55a798cd7ed1, type: 2}
   endTile: {fileID: 11400000, guid: 95ba39cf5b6f4b54887cfcab31e457b0, type: 2}
   wayTile: {fileID: 11400000, guid: bc894c69e38e7ad48b2b5dbf5983778a, type: 2}
   wallTile: {fileID: 11400000, guid: e2ba2819a4102c347ab9ba9e1f681784, type: 2}
+  startParticle: {fileID: 2126385427374010791, guid: 5a044f5dadebcce4f9e801b6a36b0f18, type: 3}
+  endParticle: {fileID: 2126385427374010791, guid: 8dd41801a7758da47bb8632cc58500d7, type: 3}
   startPos: {x: 0, y: 0, z: 0}
   endPos: {x: 0, y: 0, z: 0}
+  isDraw: 0
+  isFinding: 0

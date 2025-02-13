@@ -26,15 +26,16 @@ public class PathFinding : MonoBehaviour
 
 	private void Start()
 	{
-		Manager.Game.PathFinding = this;
+		Manager.Tile.PathFinding = this;
+		Manager.Tile.IsFinding = true;
 	}
 
 	public void Finding()
 	{
 		finalNodeList = new List<Node>();
 
-		Vector3Int startTilePos = Manager.Spawn.StartPos;
-		Vector3Int endTilePos = Manager.Spawn.EndPos;
+		Vector3Int startTilePos = Manager.Tile.StartPos;
+		Vector3Int endTilePos = Manager.Tile.EndPos;
 
 		startPos = new Vector2Int(startTilePos.x, startTilePos.y);
 		targetPos = new Vector2Int(endTilePos.x, endTilePos.y);
