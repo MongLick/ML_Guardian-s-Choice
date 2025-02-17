@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - Wall
+  - CardImage
   layers:
   - Default
   - TransparentFX
@@ -51,4 +52,7 @@ TagManager:
     locked: 0
   - name: Monster
     uniqueID: 3246621755
+    locked: 0
+  - name: Card
+    uniqueID: 914801247
     locked: 0

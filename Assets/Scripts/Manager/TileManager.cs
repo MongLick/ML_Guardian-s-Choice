@@ -68,11 +68,18 @@ public class TileManager : Singleton<TileManager>
 		StartCoroutine(PathWaitCoroutine());
 	}
 
+	private void PathDrawing()
+	{
+		pathDraw.Drawing();
+	}
+
 	private IEnumerator PathWaitCoroutine()
 	{
 		yield return new WaitWhile(() => !isFinding);
 		yield return new WaitWhile(() => !isDraw);
+		yield return new WaitUntil(() => Manager.Game != null);
 		pathFinding.Finding();
 		pathDraw.Drawing();
+		Manager.Game.OnStageClear += PathDrawing;
 	}
 }

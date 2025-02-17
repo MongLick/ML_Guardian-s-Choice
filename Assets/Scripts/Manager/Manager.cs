@@ -6,6 +6,7 @@ public static class Manager
 	public static PoolManager Pool { get { return PoolManager.Instance; } }
 	public static MonsterManager Monster { get { return MonsterManager.Instance; } }
 	public static GameManager Game { get { return GameManager.Instance; } }
+	public static CardManager Card { get { return CardManager.Instance; } }
 
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 	private static void Initialize()
@@ -21,5 +22,8 @@ public static class Manager
 
 		GameManager.ReleaseInstance();
 		GameManager.CreateInstance();
+
+		CardManager.ReleaseInstance();
+		CardManager.CreateInstance();
 	}
 }

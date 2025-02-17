@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterManager : Singleton<MonsterManager>
@@ -17,6 +16,8 @@ public class MonsterManager : Singleton<MonsterManager>
 	public int MonsterCount { get { return monsterCount; } set { monsterCount = value; } }
 	[SerializeField] int monsterMaxCount;
 	public int MonsterMaxCount { get { return monsterMaxCount; } set { monsterMaxCount = value; } }
+	[SerializeField] int monsterDeadCount;
+	public int MonsterDeadCount { get { return monsterDeadCount; } set { monsterDeadCount = value; } }
 
 	public void MonsterSpawn()
 	{
@@ -26,6 +27,8 @@ public class MonsterManager : Singleton<MonsterManager>
 	private IEnumerator MonsterSpawnCoroutine()
 	{
 		Manager.Tile.PathDraw.ClearPath();
+		monsterCount = monsterMaxCount;
+		monsterDeadCount = monsterMaxCount;
 
 		while (monsterCount > 0)
 		{
@@ -33,7 +36,5 @@ public class MonsterManager : Singleton<MonsterManager>
 			monsterCount--;
 			yield return new WaitForSeconds(delay);
 		}
-
-		monsterCount = monsterMaxCount;
 	}
 }

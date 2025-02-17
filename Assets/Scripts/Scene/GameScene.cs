@@ -12,4 +12,9 @@ public class GameScene : MonoBehaviour
 	{
 		Manager.Game.GameStart();
 	}
+
+	public void FlipAllCards()
+	{
+		Manager.Card.FlipAllCards();
+	}
 }
