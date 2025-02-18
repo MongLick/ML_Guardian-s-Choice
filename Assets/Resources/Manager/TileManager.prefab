@@ -52,6 +52,7 @@ MonoBehaviour:
   endTile: {fileID: 11400000, guid: 95ba39cf5b6f4b54887cfcab31e457b0, type: 2}
   wayTile: {fileID: 11400000, guid: bc894c69e38e7ad48b2b5dbf5983778a, type: 2}
   wallTile: {fileID: 11400000, guid: e2ba2819a4102c347ab9ba9e1f681784, type: 2}
+  drawPrefab: {fileID: 6299134740616880386, guid: 4e500d36c88bffb409b53873792da422, type: 3}
   startParticle: {fileID: 2126385427374010791, guid: 5a044f5dadebcce4f9e801b6a36b0f18, type: 3}
   endParticle: {fileID: 2126385427374010791, guid: 8dd41801a7758da47bb8632cc58500d7, type: 3}
   startPos: {x: 0, y: 0, z: 0}

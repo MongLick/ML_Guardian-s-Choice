@@ -65,6 +65,7 @@ public class MonsterController : MonoBehaviour
 
 			if(Manager.Monster.MonsterDeadCount == 0)
 			{
+				Manager.Game.IsStageStart = false;
 				Manager.Game.OnStageClear?.Invoke();
 			}
 		}

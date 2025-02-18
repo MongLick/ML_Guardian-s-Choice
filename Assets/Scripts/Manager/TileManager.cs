@@ -32,6 +32,8 @@ public class TileManager : Singleton<TileManager>
 	public TileBase WayTile { get { return wayTile; } }
 	[SerializeField] TileBase wallTile;
 	public TileBase WallTile { get { return wallTile; } }
+	[SerializeField] DrawPrefab drawPrefab;
+	public DrawPrefab DrawPrefab { get { return drawPrefab; } }
 	[SerializeField] ParticleSystem startParticle;
 	public ParticleSystem StartParticle { get { return startParticle; } }
 	[SerializeField] ParticleSystem endParticle;

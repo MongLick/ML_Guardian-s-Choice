@@ -26,7 +26,6 @@ public class MonsterManager : Singleton<MonsterManager>
 
 	private IEnumerator MonsterSpawnCoroutine()
 	{
-		Manager.Tile.PathDraw.ClearPath();
 		monsterCount = monsterMaxCount;
 		monsterDeadCount = monsterMaxCount;
 

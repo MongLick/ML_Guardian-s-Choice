@@ -1,42 +1,45 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class PathDraw : MonoBehaviour
 {
-	private List<PooledObject> placedPaths = new List<PooledObject>();
-
 	[Header("Components")]
 	[SerializeField] PathFinding pathFinding;
-	[SerializeField] PooledObject pathPrefab;
+	[SerializeField] PooledObject pooledObject;
+	[SerializeField] DrawPrefab drawPrefab;
 
 	private void Start()
 	{
 		Manager.Tile.PathDraw = this;
 		Manager.Tile.IsDraw = true;
-		Manager.Pool.CreatePool(pathPrefab, 30, 40);
 	}
 
 	public void Drawing()
 	{
-		ClearPath();
-		foreach (Node node in pathFinding.FinalNodeList)
+		if (drawPrefab == null)
 		{
-			if(node == pathFinding.FinalNodeList[0] || node == pathFinding.FinalNodeList[pathFinding.FinalNodeList.Count - 1])
-			{
-				continue;
-			}
-			Vector3 pos = new Vector3(node.X, node.Y, 0);
-			PooledObject newPath = Manager.Pool.GetPool(pathPrefab, pos, Quaternion.identity);
-			placedPaths.Add(newPath);
+			drawPrefab = Manager.Tile.DrawPrefab;
+			pooledObject = drawPrefab.GetComponent<PooledObject>();
+			Manager.Pool.CreatePool(pooledObject, 1, 2);
 		}
+
+		StartCoroutine(SpawnPrefab());
 	}
 
-	public void ClearPath()
+	private IEnumerator SpawnPrefab()
 	{
-		foreach (PooledObject path in placedPaths)
+		while(!Manager.Game.IsStageStart)
 		{
-			path.Pool.ReturnPool(path);
+			Vector3 spawnPosition = new Vector3(pathFinding.FinalNodeList[0].X, pathFinding.FinalNodeList[0].Y, 0);
+			PooledObject drawObject = Manager.Pool.GetPool(pooledObject, spawnPosition, Quaternion.identity);
+			yield return null;
+			drawPrefab = drawObject.GetComponent<DrawPrefab>();
+			drawPrefab.MoveAlongPath();
+
+			while (drawPrefab.IsMove)
+			{
+				yield return null;
+			}
 		}
-		placedPaths.Clear();
 	}
 }
