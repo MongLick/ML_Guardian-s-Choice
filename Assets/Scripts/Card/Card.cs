@@ -9,6 +9,7 @@ public class Card : MonoBehaviour
 	[SerializeField] Image backImage;
 	[SerializeField] RectTransform rectTransform;
 	[SerializeField] RectTransform maskRectTransform;
+	[SerializeField] PooledObject poolObject;
 
 	[Header("Specs")]
 	[SerializeField] float rotationSpeed;
@@ -27,7 +28,7 @@ public class Card : MonoBehaviour
 
 	public void CardChoice()
 	{
-		Manager.Card.CardParent.gameObject.SetActive(false);
+		Manager.Card.CardChoice();
 	}
 
 	private IEnumerator RotateCard()

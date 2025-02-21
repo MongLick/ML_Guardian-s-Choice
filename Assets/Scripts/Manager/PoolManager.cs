@@ -4,6 +4,7 @@ using UnityEngine;
 public class PoolManager : Singleton<PoolManager>
 {
 	private Dictionary<int, ObjectPool> poolDic = new Dictionary<int, ObjectPool>();
+	private List<GameObject> destroyObject = new List<GameObject>();
 
 	public bool IsPoolCreated(PooledObject prefab)
 	{
@@ -19,6 +20,16 @@ public class PoolManager : Singleton<PoolManager>
 		objectPool.CreatePool(prefab, size, capacity);
 
 		poolDic.Add(prefab.GetInstanceID(), objectPool);
+
+		destroyObject.Add(gameObject);
+	}
+
+	public void DestroyPool()
+	{
+		foreach (GameObject poolObject in destroyObject)
+		{
+			Destroy(poolObject);
+		}
 	}
 
 	public void DestroyPool(PooledObject prefab)

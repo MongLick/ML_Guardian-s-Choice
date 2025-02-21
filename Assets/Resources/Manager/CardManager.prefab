@@ -45,17 +45,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefabs:
-  - {fileID: 357152058192191844, guid: adc730fb22569a04bb5912ead7f6b0fc, type: 3}
-  - {fileID: 357152058192191844, guid: c9b545231c3cd514ba6c9416f0d40104, type: 3}
-  - {fileID: 357152058192191844, guid: 10079cd397b9f1e4685f48f0d30a8f62, type: 3}
-  - {fileID: 357152058192191844, guid: 532f981b524f1d942b6c5e16b7f368e6, type: 3}
-  - {fileID: 357152058192191844, guid: ab5c1e3237b12024497a6a4137a58720, type: 3}
-  - {fileID: 357152058192191844, guid: 0da05a63f5d01e74dafd75dfc5b809c1, type: 3}
-  - {fileID: 357152058192191844, guid: bd69349d0890afa4f9d9ae553344956e, type: 3}
-  - {fileID: 357152058192191844, guid: c9e8ce9f24fe30241969edbd81878d73, type: 3}
-  - {fileID: 357152058192191844, guid: 061ed87ab09587e4aa5d7300dc2f2ded, type: 3}
-  - {fileID: 357152058192191844, guid: 0878d3d8a783b7743ab948d261154281, type: 3}
-  spawnedCards: []
+  - {fileID: 1340736825968731610, guid: adc730fb22569a04bb5912ead7f6b0fc, type: 3}
+  - {fileID: 468247156107823946, guid: c9b545231c3cd514ba6c9416f0d40104, type: 3}
+  - {fileID: -5217524485887850303, guid: 10079cd397b9f1e4685f48f0d30a8f62, type: 3}
+  - {fileID: 8353511273319838475, guid: 532f981b524f1d942b6c5e16b7f368e6, type: 3}
+  - {fileID: 3085750439750744310, guid: ab5c1e3237b12024497a6a4137a58720, type: 3}
+  - {fileID: -54162743031152018, guid: 0da05a63f5d01e74dafd75dfc5b809c1, type: 3}
+  - {fileID: 7773107781983304269, guid: bd69349d0890afa4f9d9ae553344956e, type: 3}
+  - {fileID: 3288802938621923802, guid: c9e8ce9f24fe30241969edbd81878d73, type: 3}
+  - {fileID: -7065056943687107743, guid: 061ed87ab09587e4aa5d7300dc2f2ded, type: 3}
+  - {fileID: 4781867685816866351, guid: 0878d3d8a783b7743ab948d261154281, type: 3}
   cardParent: {fileID: 0}
   anchorPositions:
   - {x: 0.3, y: 0.6}

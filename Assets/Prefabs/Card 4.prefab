@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 759861926517536702}
   - component: {fileID: 7367544439983803729}
   - component: {fileID: 5399019953591739630}
+  - component: {fileID: 8353511273319838475}
   m_Layer: 5
   m_Name: Card 4
   m_TagString: Untagged
@@ -57,6 +58,7 @@ MonoBehaviour:
   backImage: {fileID: 2860330756101610844}
   rectTransform: {fileID: 7318669041251208932}
   maskRectTransform: {fileID: 5681699591320008307}
+  poolObject: {fileID: 8353511273319838475}
   rotationSpeed: 120
 --- !u!114 &759861926517536702
 MonoBehaviour:
@@ -152,6 +154,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 357152058192191844}
   m_CullTransparentMesh: 1
+--- !u!114 &8353511273319838475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357152058192191844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce27418894ae56489ea61bfdcdd001f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  releaseTime: 0
+  autoRelease: 0
 --- !u!1 &1264545438536815421
 GameObject:
   m_ObjectHideFlags: 0
