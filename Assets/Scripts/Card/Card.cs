@@ -13,6 +13,8 @@ public class Card : MonoBehaviour
 
 	[Header("Specs")]
 	[SerializeField] float rotationSpeed;
+	[SerializeField] int index;
+	public int Index { get { return index; } set { index = value; } }
 
 	private void Start()
 	{
@@ -28,12 +30,24 @@ public class Card : MonoBehaviour
 
 	public void CardChoice()
 	{
-		Manager.Card.CardChoice();
+		for (int i = 0; i < Manager.UI.CardUI.CardPos.Length; i++)
+		{
+			if (Manager.UI.CardUI.CardPos[i].GetComponentInChildren<Card>() == null)
+			{
+				Manager.Card.CardChoice(index, i);
+				return;
+			}
+		}
+	}
+
+	public void MoveAndScaleToTarget(Transform target)
+	{
+		StartCoroutine(MoveAndScaleRoutine(target));
 	}
 
 	private IEnumerator RotateCard()
 	{
-		yield return new WaitUntil(() => Manager.Card.CardParent.gameObject.activeSelf == true);
+		Manager.Card.CardDrawUI.gameObject.SetActive(true);
 
 		float targetRotation = 0f;
 		float currentRotation = -180f;
@@ -63,5 +77,33 @@ public class Card : MonoBehaviour
 		}
 
 		rectTransform.rotation = Quaternion.Euler(0f, 0f, 0f);
+	}
+
+	private IEnumerator MoveAndScaleRoutine(Transform target)
+	{
+		Debug.Log(1);
+		Vector3 startPosition = transform.position;
+		Vector3 targetPosition = target.position;
+		Vector3 startScale = transform.localScale;
+		Vector3 targetScale = new Vector3(0.5f, 0.5f, 1f);
+
+		float duration = 0.5f;
+		float elapsedTime = 0f;
+
+		while (elapsedTime < duration)
+		{
+			elapsedTime += Time.deltaTime;
+			float t = elapsedTime / duration;
+
+			transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+			transform.localScale = Vector3.Lerp(startScale, targetScale, t);
+
+			yield return null;
+		}
+
+		transform.position = targetPosition;
+		transform.localScale = targetScale;
+
+		transform.SetParent(target, true);
 	}
 }

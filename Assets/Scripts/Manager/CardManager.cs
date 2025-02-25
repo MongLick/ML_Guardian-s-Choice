@@ -10,25 +10,33 @@ public class CardManager : Singleton<CardManager>
 	[SerializeField] PooledObject[] cardPrefabs;
 	[SerializeField] Transform cardParent;
 	public Transform CardParent { get { return cardParent; } }
+	[SerializeField] Transform cardDrawUI;
+	public Transform CardDrawUI { get { return cardDrawUI; } }
 
 	[Header("Vector")]
 	[SerializeField] Vector2[] anchorPositions;
 
 	private void Start()
 	{
-		cardParent = GameObject.FindGameObjectWithTag("CardImage").transform;
-		cardParent.gameObject.SetActive(false);
+		cardParent = GameObject.FindGameObjectWithTag("Canvas").transform;
+		cardDrawUI = GameObject.FindGameObjectWithTag("CardImage").transform;
+
+		cardDrawUI.gameObject.SetActive(false);
 
 		for (int i = 0; i < cardPrefabs.Length; i++)
 		{
-			Manager.Pool.CreatePool(cardPrefabs[i], 1, 2);
+			Manager.Pool.CardCreatePool(cardPrefabs[i], 2, 5);
 
-			PooledObject cardObj = Manager.Pool.GetPool(cardPrefabs[i], Vector3.zero, Quaternion.identity);
-			cardObj.transform.SetParent(cardParent, false);
-			cardObj.Pool.ReturnPool(cardObj);
+			/*for (int j = 0; j < 2; j++)
+			{
+				PooledObject cardObj = Manager.Pool.GetPool(cardPrefabs[i], Vector3.zero, Quaternion.identity);
+				cardObj.transform.SetParent(cardParent, false);
+				cardObj.Pool.ReturnPool(cardObj);
+
+				Card card = cardObj.GetComponent<Card>();
+				card.Index = i;
+			}*/
 		}
-
-		Manager.Pool.DestroyPool();
 	}
 
 	private void SpawnRandomCards()
@@ -49,7 +57,7 @@ public class CardManager : Singleton<CardManager>
 
 			selectedIndices.Add(randomIndex);
 
-			PooledObject cardObj = Manager.Pool.GetPool(cardPrefabs[randomIndex], cardParent.transform.position, Quaternion.identity);
+			PooledObject cardObj = Manager.Pool.GetPool(cardPrefabs[randomIndex], cardDrawUI.transform.position, Quaternion.identity);
 			pooledObjects.Add(cardObj);
 
 			Card card = cardObj.GetComponent<Card>();
@@ -59,27 +67,28 @@ public class CardManager : Singleton<CardManager>
 			cardTransform.sizeDelta = new Vector2(300, 450);
 			cardTransform.anchorMin = anchorPositions[i];
 			cardTransform.anchorMax = anchorPositions[i];
-			cardTransform.anchoredPosition = Vector2.zero; 
+			cardTransform.anchoredPosition = Vector2.zero;
 			cardTransform.rotation = Quaternion.identity;
 
 			i++;
 		}
 	}
 
-	public void CardChoice()
+	public void CardChoice(int index, int uiIndex)
 	{
-		foreach(PooledObject pool in pooledObjects)
+		cardDrawUI.gameObject.SetActive(false);
+
+		foreach (PooledObject pool in pooledObjects)
 		{
 			pool.Pool.ReturnPool(pool);
 		}
 
-		cardParent.gameObject.SetActive(false);
+		PooledObject cardObj = Manager.Pool.GetPool(cardPrefabs[index], cardDrawUI.transform.position, Quaternion.identity);
+		cardObj.GetComponent<Card>().MoveAndScaleToTarget(Manager.UI.CardUI.CardPos[uiIndex]);
 	}
 
 	public void FlipAllCards()
 	{
-		cardParent.gameObject.SetActive(true);
-
 		SpawnRandomCards();
 	}
 }

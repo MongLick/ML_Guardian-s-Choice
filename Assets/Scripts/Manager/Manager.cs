@@ -7,6 +7,7 @@ public static class Manager
 	public static MonsterManager Monster { get { return MonsterManager.Instance; } }
 	public static GameManager Game { get { return GameManager.Instance; } }
 	public static CardManager Card { get { return CardManager.Instance; } }
+	public static UIManager UI { get { return UIManager.Instance; } }
 
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 	private static void Initialize()
@@ -25,5 +26,8 @@ public static class Manager
 
 		CardManager.ReleaseInstance();
 		CardManager.CreateInstance();
+
+		UIManager.ReleaseInstance();
+		UIManager.CreateInstance();
 	}
 }
