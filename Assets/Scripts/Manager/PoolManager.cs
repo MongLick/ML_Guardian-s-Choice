@@ -16,6 +16,9 @@ public class PoolManager : Singleton<PoolManager>
 		gameObject.name = $"Pool_{prefab.name}";
 
 		RectTransform rectTransform = gameObject.AddComponent<RectTransform>();
+		rectTransform.anchorMin = new Vector2(0, 0);
+		rectTransform.anchorMax = new Vector2(1, 1);
+		rectTransform.anchoredPosition = Vector2.zero;
 
 		ObjectPool objectPool = gameObject.AddComponent<ObjectPool>();
 		objectPool.CreatePool(prefab, size, capacity);

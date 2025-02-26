@@ -26,20 +26,10 @@ public class CardManager : Singleton<CardManager>
 		for (int i = 0; i < cardPrefabs.Length; i++)
 		{
 			Manager.Pool.CardCreatePool(cardPrefabs[i], 2, 5);
-
-			/*for (int j = 0; j < 2; j++)
-			{
-				PooledObject cardObj = Manager.Pool.GetPool(cardPrefabs[i], Vector3.zero, Quaternion.identity);
-				cardObj.transform.SetParent(cardParent, false);
-				cardObj.Pool.ReturnPool(cardObj);
-
-				Card card = cardObj.GetComponent<Card>();
-				card.Index = i;
-			}*/
 		}
 	}
 
-	private void SpawnRandomCards()
+	public void SpawnRandomCards()
 	{
 		pooledObjects.Clear();
 		selectedIndices.Clear();
@@ -62,6 +52,7 @@ public class CardManager : Singleton<CardManager>
 
 			Card card = cardObj.GetComponent<Card>();
 			card.FlipCard();
+			card.IsDraw = true;
 
 			RectTransform cardTransform = cardObj.GetComponent<RectTransform>();
 			cardTransform.sizeDelta = new Vector2(300, 450);
@@ -83,12 +74,9 @@ public class CardManager : Singleton<CardManager>
 			pool.Pool.ReturnPool(pool);
 		}
 
-		PooledObject cardObj = Manager.Pool.GetPool(cardPrefabs[index], cardDrawUI.transform.position, Quaternion.identity);
-		cardObj.GetComponent<Card>().MoveAndScaleToTarget(Manager.UI.CardUI.CardPos[uiIndex]);
-	}
-
-	public void FlipAllCards()
-	{
-		SpawnRandomCards();
+		PooledObject poolObject = Manager.Pool.GetPool(cardPrefabs[index], cardDrawUI.transform.position, Quaternion.identity);
+		Card cardObject = poolObject.GetComponent<Card>();
+		cardObject.MoveAndScaleToTarget(Manager.UI.CardUI.CardPos[uiIndex]);
+		Manager.UI.CardUI.CardPos[uiIndex].GetComponent<CardSlot>().CurrentCard = cardObject;
 	}
 }

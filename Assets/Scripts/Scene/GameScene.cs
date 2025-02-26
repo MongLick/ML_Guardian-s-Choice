@@ -13,8 +13,8 @@ public class GameScene : MonoBehaviour
 		Manager.Game.GameStart();
 	}
 
-	public void FlipAllCards()
+	public void SpawnRandomCards()
 	{
-		Manager.Card.FlipAllCards();
+		Manager.Card.SpawnRandomCards();
 	}
 }

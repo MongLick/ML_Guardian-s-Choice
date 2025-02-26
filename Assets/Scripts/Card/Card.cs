@@ -1,20 +1,29 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Card : MonoBehaviour
+public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 	[Header("Components")]
+	[SerializeField] Button button;
 	[SerializeField] Image frontImage;
 	[SerializeField] Image backImage;
 	[SerializeField] RectTransform rectTransform;
 	[SerializeField] RectTransform maskRectTransform;
 	[SerializeField] PooledObject poolObject;
+	[SerializeField] Transform originalParent;
+
+	[Header("Vector")]
+	private Vector3 originalPosition;
 
 	[Header("Specs")]
 	[SerializeField] float rotationSpeed;
 	[SerializeField] int index;
 	public int Index { get { return index; } set { index = value; } }
+	[SerializeField] bool isDraw;
+	public bool IsDraw { get { return isDraw; } set { isDraw = value; } }
 
 	private void Start()
 	{
@@ -30,12 +39,15 @@ public class Card : MonoBehaviour
 
 	public void CardChoice()
 	{
-		for (int i = 0; i < Manager.UI.CardUI.CardPos.Length; i++)
+		if(isDraw)
 		{
-			if (Manager.UI.CardUI.CardPos[i].GetComponentInChildren<Card>() == null)
+			for (int i = 0; i < Manager.UI.CardUI.CardPos.Length; i++)
 			{
-				Manager.Card.CardChoice(index, i);
-				return;
+				if (Manager.UI.CardUI.CardPos[i].GetComponentInChildren<Card>() == null)
+				{
+					Manager.Card.CardChoice(index, i);
+					return;
+				}
 			}
 		}
 	}
@@ -43,6 +55,62 @@ public class Card : MonoBehaviour
 	public void MoveAndScaleToTarget(Transform target)
 	{
 		StartCoroutine(MoveAndScaleRoutine(target));
+	}
+
+	public void OnBeginDrag(PointerEventData eventData)
+	{
+		if (isDraw)
+		{
+			return;
+		}
+
+		originalPosition = rectTransform.position;
+		originalParent = transform.parent;
+		transform.SetParent(Manager.Card.CardParent, false);
+	}
+
+	public void OnDrag(PointerEventData eventData)
+	{
+		if (isDraw)
+		{
+			return;
+		}
+
+		Vector3 newPosition = eventData.position;
+
+		if (Manager.Card.CardParent.GetComponent<Canvas>().renderMode == RenderMode.ScreenSpaceCamera || Manager.Card.CardParent.GetComponent<Canvas>().renderMode == RenderMode.WorldSpace)
+		{
+			RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out newPosition);
+		}
+
+		rectTransform.position = newPosition;
+	}
+
+	public void OnEndDrag(PointerEventData eventData)
+	{
+		if (isDraw)
+		{
+			return;
+		}
+
+		PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+		pointerEventData.position = eventData.position;
+
+		List<RaycastResult> results = new List<RaycastResult>();
+		EventSystem.current.RaycastAll(pointerEventData, results);
+
+		foreach (var result in results)
+		{
+			CardSlot slot = result.gameObject.GetComponent<CardSlot>();
+			if (slot != null)
+			{
+				slot.OnDrop(eventData);
+				return;
+			}
+		}
+
+		rectTransform.position = originalPosition;
+		transform.SetParent(originalParent);
 	}
 
 	private IEnumerator RotateCard()
@@ -81,7 +149,7 @@ public class Card : MonoBehaviour
 
 	private IEnumerator MoveAndScaleRoutine(Transform target)
 	{
-		Debug.Log(1);
+		button.interactable = false;
 		Vector3 startPosition = transform.position;
 		Vector3 targetPosition = target.position;
 		Vector3 startScale = transform.localScale;
@@ -105,5 +173,7 @@ public class Card : MonoBehaviour
 		transform.localScale = targetScale;
 
 		transform.SetParent(target, true);
+		isDraw = false;
+		button.interactable = true;
 	}
 }

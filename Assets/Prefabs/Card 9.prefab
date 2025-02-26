@@ -54,12 +54,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c16bdb46f8b30a48acd5de897b11e1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 7367544439983803729}
   frontImage: {fileID: 5362590178796034919}
   backImage: {fileID: 2860330756101610844}
   rectTransform: {fileID: 7318669041251208932}
   maskRectTransform: {fileID: 5681699591320008307}
   poolObject: {fileID: -7065056943687107743}
+  canvasGroup: {fileID: 0}
+  originalParent: {fileID: 0}
   rotationSpeed: 120
+  index: 8
+  isDraw: 0
 --- !u!114 &759861926517536702
 MonoBehaviour:
   m_ObjectHideFlags: 0

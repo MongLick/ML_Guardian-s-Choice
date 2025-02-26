@@ -46,6 +46,8 @@ public class ObjectPool : MonoBehaviour
 			instance.Pool = this;
 			instance.transform.position = position;
 			instance.transform.rotation = rotation;
+			instance.transform.SetParent(transform, false);
+			objectPool.Push(instance);
 		}
 
 		return instance;
