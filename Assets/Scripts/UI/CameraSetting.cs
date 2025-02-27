@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class Test : MonoBehaviour
+public class CameraSetting : MonoBehaviour
 {
 	private void Start()
 	{
-		SetResolution(); 
+		SetResolution();
 	}
 
 	public void SetResolution()

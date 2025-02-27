@@ -11,8 +11,13 @@ public class CardSlot : MonoBehaviour, IDropHandler
 		if (eventData.pointerDrag != null)
 		{
 			Card draggedCard = eventData.pointerDrag.GetComponent<Card>();
-			if (draggedCard == null) return;
-			if (CurrentCard == null)
+
+			if (draggedCard == null)
+			{
+				return;
+			}
+
+			if (currentCard == null)
 			{
 				PlaceCard(draggedCard);
 			}
@@ -25,21 +30,23 @@ public class CardSlot : MonoBehaviour, IDropHandler
 
 	private void PlaceCard(Card newCard)
 	{
+		newCard.CardSlot.CurrentCard = null;
+		newCard.CardSlot = this;
 		newCard.transform.SetParent(transform, false);
 		newCard.transform.position = transform.position;
-		CurrentCard = newCard;
+		currentCard = newCard;
 	}
 
 	private void SwapCards(Card newCard)
 	{
-		Transform oldSlot = CurrentCard.transform.parent; 
+		currentCard.transform.SetParent(newCard.CardSlot.transform, false);
+		currentCard.transform.position = newCard.CardSlot.transform.position;
+		currentCard.CardSlot = newCard.CardSlot;
+		newCard.CardSlot.CurrentCard = currentCard;
 
-		CurrentCard.transform.SetParent(newCard.transform.parent, false);
-		CurrentCard.transform.position = newCard.transform.parent.position;
-
-		newCard.transform.SetParent(oldSlot, false);
-		newCard.transform.position = oldSlot.position;
-
-		CurrentCard = newCard;
+		newCard.transform.SetParent(this.transform, false);
+		newCard.transform.position = this.transform.position;
+		newCard.CardSlot = this;
+		currentCard = newCard;
 	}
 }

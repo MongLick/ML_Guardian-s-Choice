@@ -76,7 +76,8 @@ public class CardManager : Singleton<CardManager>
 
 		PooledObject poolObject = Manager.Pool.GetPool(cardPrefabs[index], cardDrawUI.transform.position, Quaternion.identity);
 		Card cardObject = poolObject.GetComponent<Card>();
-		cardObject.MoveAndScaleToTarget(Manager.UI.CardUI.CardPos[uiIndex]);
+		cardObject.MoveAndScaleToTarget(Manager.UI.CardUI.CardPos[uiIndex].GetComponent<RectTransform>());
 		Manager.UI.CardUI.CardPos[uiIndex].GetComponent<CardSlot>().CurrentCard = cardObject;
+		cardObject.CardSlot = Manager.UI.CardUI.CardPos[uiIndex].GetComponent<CardSlot>();
 	}
 }

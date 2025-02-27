@@ -6,14 +6,18 @@ using UnityEngine.UI;
 
 public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+	private enum CardType { Tower, Spell, Upgrade }
+	[SerializeField] CardType cardType;
+
 	[Header("Components")]
+	[SerializeField] CardSlot cardSlot;
+	public CardSlot CardSlot { get { return cardSlot; } set { cardSlot = value; } }
 	[SerializeField] Button button;
 	[SerializeField] Image frontImage;
 	[SerializeField] Image backImage;
 	[SerializeField] RectTransform rectTransform;
 	[SerializeField] RectTransform maskRectTransform;
 	[SerializeField] PooledObject poolObject;
-	[SerializeField] Transform originalParent;
 
 	[Header("Vector")]
 	private Vector3 originalPosition;
@@ -39,7 +43,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
 	public void CardChoice()
 	{
-		if(isDraw)
+		if (isDraw)
 		{
 			for (int i = 0; i < Manager.UI.CardUI.CardPos.Length; i++)
 			{
@@ -52,7 +56,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 		}
 	}
 
-	public void MoveAndScaleToTarget(Transform target)
+	public void MoveAndScaleToTarget(RectTransform target)
 	{
 		StartCoroutine(MoveAndScaleRoutine(target));
 	}
@@ -65,7 +69,6 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 		}
 
 		originalPosition = rectTransform.position;
-		originalParent = transform.parent;
 		transform.SetParent(Manager.Card.CardParent, false);
 	}
 
@@ -99,7 +102,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 		List<RaycastResult> results = new List<RaycastResult>();
 		EventSystem.current.RaycastAll(pointerEventData, results);
 
-		foreach (var result in results)
+		foreach (RaycastResult result in results)
 		{
 			CardSlot slot = result.gameObject.GetComponent<CardSlot>();
 			if (slot != null)
@@ -110,7 +113,8 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 		}
 
 		rectTransform.position = originalPosition;
-		transform.SetParent(originalParent);
+		transform.SetParent(cardSlot.transform, false);
+		transform.position = cardSlot.transform.position;
 	}
 
 	private IEnumerator RotateCard()
@@ -147,12 +151,15 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 		rectTransform.rotation = Quaternion.Euler(0f, 0f, 0f);
 	}
 
-	private IEnumerator MoveAndScaleRoutine(Transform target)
+	private IEnumerator MoveAndScaleRoutine(RectTransform target)
 	{
 		button.interactable = false;
-		Vector3 startPosition = transform.position;
+		Vector3 startPosition = rectTransform.position;
+		Vector2 startSize = rectTransform.sizeDelta;
+		Vector3 startScale = rectTransform.localScale;
+
 		Vector3 targetPosition = target.position;
-		Vector3 startScale = transform.localScale;
+		Vector2 targetSize = target.sizeDelta * 2;
 		Vector3 targetScale = new Vector3(0.5f, 0.5f, 1f);
 
 		float duration = 0.5f;
@@ -163,16 +170,17 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 			elapsedTime += Time.deltaTime;
 			float t = elapsedTime / duration;
 
-			transform.position = Vector3.Lerp(startPosition, targetPosition, t);
-			transform.localScale = Vector3.Lerp(startScale, targetScale, t);
+			rectTransform.position = Vector3.Lerp(startPosition, targetPosition, t);
+			rectTransform.sizeDelta = Vector3.Lerp(startSize, targetSize, t);
+			rectTransform.localScale = Vector3.Lerp(startScale, targetScale, t);
 
 			yield return null;
 		}
 
-		transform.position = targetPosition;
-		transform.localScale = targetScale;
+		rectTransform.position = targetPosition;
+		rectTransform.localScale = targetScale;
 
-		transform.SetParent(target, true);
+		rectTransform.SetParent(target, true);
 		isDraw = false;
 		button.interactable = true;
 	}

@@ -54,14 +54,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c16bdb46f8b30a48acd5de897b11e1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardType: 2
+  cardSlot: {fileID: 0}
   button: {fileID: 7367544439983803729}
   frontImage: {fileID: 5362590178796034919}
   backImage: {fileID: 2860330756101610844}
   rectTransform: {fileID: 7318669041251208932}
   maskRectTransform: {fileID: 5681699591320008307}
   poolObject: {fileID: 4781867685816866351}
-  canvasGroup: {fileID: 0}
-  originalParent: {fileID: 0}
   rotationSpeed: 120
   index: 9
   isDraw: 0
@@ -330,8 +330,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAC15\uB825\uD55C \uC5BC\uC74C \uB9C8\uBC95\uC744 \n\uC0DD\uC131\uD569\uB2C8\uB2E4.\n\n\uC801\uC758
-    \uC774\uB3D9\uC18D\uB3C4\uAC00 30% \n\uB290\uB824\uC9D1\uB2C8\uB2E4."
+  m_text: "\uD0C0\uC6CC\uB97C \uAC15\uD654\uC2DC\uD0B5\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e86619aabbe6fc49a31eda74e516efa, type: 2}
   m_sharedMaterial: {fileID: 669590729426334313, guid: 3e86619aabbe6fc49a31eda74e516efa, type: 2}
