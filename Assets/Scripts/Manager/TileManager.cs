@@ -51,7 +51,7 @@ public class TileManager : Singleton<TileManager>
 	[SerializeField] bool isFinding;
 	public bool IsFinding { get { return isFinding; } set { isFinding = value; } }
 
-	private void Start()
+	public void GameStart()
 	{
 		if (floorTilemap == null)
 		{

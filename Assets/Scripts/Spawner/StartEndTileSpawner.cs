@@ -9,12 +9,7 @@ public class StartEndTileSpawner : MonoBehaviour
 	[SerializeField] int randomMin;
 	[SerializeField] int randomMax;
 
-	private void Start()
-	{
-		StartEndTileSpawn();
-	}
-
-	private void StartEndTileSpawn()
+	public void StartEndTileSpawn()
 	{
 		int startY = Random.Range(randomMin, randomMax);
 		Manager.Tile.StartPos = new Vector3Int(startXPos, startY, tileZPos);

@@ -16,7 +16,7 @@ public class CardManager : Singleton<CardManager>
 	[Header("Vector")]
 	[SerializeField] Vector2[] anchorPositions;
 
-	private void Start()
+	public void GameStart()
 	{
 		cardParent = GameObject.FindGameObjectWithTag("Canvas").transform;
 		cardDrawUI = GameObject.FindGameObjectWithTag("CardImage").transform;
