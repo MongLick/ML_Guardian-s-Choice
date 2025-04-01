@@ -7,6 +7,7 @@ public class RightUI : MonoBehaviour
 	[SerializeField] Button gameStartButton;
 	[SerializeField] Button cardDrawButton;
 
+
 	[Header("Specs")]
 	[SerializeField] bool isAllSlot;
 
