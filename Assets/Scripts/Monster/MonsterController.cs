@@ -61,12 +61,14 @@ public class MonsterController : MonoBehaviour
 		{
 			currentNodeIndex = 1;
 			pooledObject.Pool.ReturnPool(pooledObject);
+			Manager.Game.Health--;
 			Manager.Monster.MonsterDeadCount--;
 
 			if(Manager.Monster.MonsterDeadCount == 0)
 			{
-				Manager.Game.IsStageStart = false;
-				Manager.Game.OnStageClear?.Invoke();
+				Manager.Game.IsRoundStart = false;
+				Manager.Game.OnRoundClear?.Invoke();
+				Manager.Game.Gold += 200;
 			}
 		}
 	}

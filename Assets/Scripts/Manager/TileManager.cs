@@ -82,6 +82,6 @@ public class TileManager : Singleton<TileManager>
 		yield return new WaitUntil(() => Manager.Game != null);
 		pathFinding.Finding();
 		pathDraw.Drawing();
-		Manager.Game.OnStageClear += PathDrawing;
+		Manager.Game.OnRoundClear += PathDrawing;
 	}
 }

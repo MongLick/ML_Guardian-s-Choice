@@ -49,7 +49,7 @@ public class DrawPrefab : MonoBehaviour
 	{
 		isMove = true;
 
-		while (!Manager.Game.IsStageStart)
+		while (!Manager.Game.IsRoundStart)
 		{
 			path = pathFinding.FinalNodeList;
 

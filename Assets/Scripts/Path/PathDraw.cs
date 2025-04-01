@@ -28,7 +28,7 @@ public class PathDraw : MonoBehaviour
 
 	private IEnumerator SpawnPrefab()
 	{
-		while(!Manager.Game.IsStageStart)
+		while(!Manager.Game.IsRoundStart)
 		{
 			Vector3 spawnPosition = new Vector3(pathFinding.FinalNodeList[0].X, pathFinding.FinalNodeList[0].Y, 0);
 			PooledObject drawObject = Manager.Pool.GetPool(pooledObject, spawnPosition, Quaternion.identity);

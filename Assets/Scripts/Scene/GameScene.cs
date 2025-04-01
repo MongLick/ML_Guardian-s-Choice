@@ -13,14 +13,4 @@ public class GameScene : BaseScene
 		Manager.Tile.PathWait();
 		startEndTileSpawner.StartEndTileSpawn();
 	}
-
-	public void GameStart()
-	{
-		Manager.Game.GameStart();
-	}
-
-	public void SpawnRandomCards()
-	{
-		Manager.Card.SpawnRandomCards();
-	}
 }
