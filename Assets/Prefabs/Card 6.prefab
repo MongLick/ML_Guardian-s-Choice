@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 759861926517536702}
   - component: {fileID: 7367544439983803729}
   - component: {fileID: 5399019953591739630}
-  - component: {fileID: -54162743031152018}
+  - component: {fileID: -7065056943687107743}
   m_Layer: 5
   m_Name: Card 6
   m_TagString: Untagged
@@ -61,9 +61,9 @@ MonoBehaviour:
   backImage: {fileID: 2860330756101610844}
   rectTransform: {fileID: 7318669041251208932}
   maskRectTransform: {fileID: 5681699591320008307}
-  poolObject: {fileID: -54162743031152018}
+  poolObject: {fileID: -7065056943687107743}
   rotationSpeed: 120
-  index: 5
+  index: 6
   isDraw: 0
 --- !u!114 &759861926517536702
 MonoBehaviour:
@@ -159,7 +159,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 357152058192191844}
   m_CullTransparentMesh: 1
---- !u!114 &-54162743031152018
+--- !u!114 &-7065056943687107743
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 1701795266023128852}
   - component: {fileID: 2050106175589946778}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: DescriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -330,8 +330,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAC15\uB825\uD55C \uC5BC\uC74C \uB9C8\uBC95\uC744 \n\uC0DD\uC131\uD569\uB2C8\uB2E4.\n\n\uC801\uC758
-    \uC774\uB3D9\uC18D\uB3C4\uAC00 30% \n\uB290\uB824\uC9D1\uB2C8\uB2E4."
+  m_text: "\uC801\uC758 \uACBD\uB85C\uB97C \uB9C9\uB294 \uBCBD\uC744 \n\uC0DD\uC131\uD569\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e86619aabbe6fc49a31eda74e516efa, type: 2}
   m_sharedMaterial: {fileID: 669590729426334313, guid: 3e86619aabbe6fc49a31eda74e516efa, type: 2}
@@ -412,7 +411,7 @@ GameObject:
   - component: {fileID: 3918030829831412817}
   - component: {fileID: 9216110350479197513}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -465,7 +464,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC774\uB984"
+  m_text: "\uBCBD \uCE74\uB4DC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e86619aabbe6fc49a31eda74e516efa, type: 2}
   m_sharedMaterial: {fileID: 669590729426334313, guid: 3e86619aabbe6fc49a31eda74e516efa, type: 2}
@@ -546,7 +545,7 @@ GameObject:
   - component: {fileID: 2189861135701604089}
   - component: {fileID: 5072996348945204685}
   m_Layer: 5
-  m_Name: Image
+  m_Name: PrefabImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -599,7 +598,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 77184ea7cb9175d489c94513eec708be, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7c7473725950149488d761b6377b1d1a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
