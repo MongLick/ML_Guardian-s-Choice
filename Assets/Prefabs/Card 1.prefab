@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c16bdb46f8b30a48acd5de897b11e1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardType: 0
+  cardType: 1
   cardSlot: {fileID: 0}
   button: {fileID: 7367544439983803729}
   frontImage: {fileID: 5362590178796034919}
@@ -65,6 +65,7 @@ MonoBehaviour:
   rotationSpeed: 120
   index: 1
   isDraw: 0
+  isClick: 0
 --- !u!114 &759861926517536702
 MonoBehaviour:
   m_ObjectHideFlags: 0

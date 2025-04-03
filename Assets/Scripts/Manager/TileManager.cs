@@ -75,6 +75,16 @@ public class TileManager : Singleton<TileManager>
 		pathDraw.Drawing();
 	}
 
+	public void UpdateWallTile(bool active)
+	{
+		wallTilemap.GetComponent<WallTile>().Highlight(active);
+	}
+
+	public void UpdateFloorTile(bool active)
+	{
+		floorTilemap.GetComponent<FloorTile>().Highlight(active);
+	}
+
 	private IEnumerator PathWaitCoroutine()
 	{
 		yield return new WaitWhile(() => !isFinding);

@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Card : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-	private enum CardType { Tower, Spell, Upgrade }
+	private enum CardType { Sword, Bow, Spear, Ice, Poison, Lightning, Wall, Upgrade }
 	[SerializeField] CardType cardType;
 
 	[Header("Components")]
@@ -59,6 +59,59 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 	public void MoveAndScaleToTarget(RectTransform target)
 	{
 		StartCoroutine(MoveAndScaleRoutine(target));
+	}
+
+	public void OnPointerClick(PointerEventData eventData)
+	{
+		if(Manager.Card.IsClick)
+		{
+			Manager.Tile.UpdateWallTile(false);
+			Manager.Tile.UpdateFloorTile(false);
+			Manager.Card.IsClick = false;
+			return;
+		}
+
+        if (cardSlot != null)
+        {
+			Manager.Card.IsClick = true;
+			Manager.Card.CurrentCard = this;
+
+			switch (cardType)
+			{
+				case CardType.Sword:
+					Manager.Tile.UpdateWallTile(true);
+					Manager.Tile.UpdateFloorTile(false);
+					break;
+				case CardType.Bow:
+					Manager.Tile.UpdateWallTile(true);
+					Manager.Tile.UpdateFloorTile(false);
+					break;
+				case CardType.Spear:
+					Manager.Tile.UpdateWallTile(true);
+					Manager.Tile.UpdateFloorTile(false);
+					break;
+				case CardType.Ice:
+					Manager.Tile.UpdateWallTile(false);
+					Manager.Tile.UpdateFloorTile(true);
+					break;
+				case CardType.Poison:
+					Manager.Tile.UpdateWallTile(false);
+					Manager.Tile.UpdateFloorTile(true);
+					break;
+				case CardType.Lightning:
+					Manager.Tile.UpdateWallTile(false);
+					Manager.Tile.UpdateFloorTile(true);
+					break;
+				case CardType.Wall:
+					Manager.Tile.UpdateWallTile(false);
+					Manager.Tile.UpdateFloorTile(true);
+					break;
+				case CardType.Upgrade:
+					Manager.Tile.UpdateWallTile(true);
+					Manager.Tile.UpdateFloorTile(false);
+					break;
+			}
+		}
 	}
 
 	public void OnBeginDrag(PointerEventData eventData)

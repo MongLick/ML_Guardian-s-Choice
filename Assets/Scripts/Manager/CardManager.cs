@@ -7,6 +7,8 @@ public class CardManager : Singleton<CardManager>
 	private HashSet<int> selectedIndices = new HashSet<int>();
 
 	[Header("Components")]
+	[SerializeField] Card currentCard;
+	public Card CurrentCard { get { return currentCard; } set { currentCard = value; } }
 	[SerializeField] PooledObject[] cardPrefabs;
 	[SerializeField] Transform cardParent;
 	public Transform CardParent { get { return cardParent; } }
@@ -15,6 +17,10 @@ public class CardManager : Singleton<CardManager>
 
 	[Header("Vector")]
 	[SerializeField] Vector2[] anchorPositions;
+
+	[Header("Specs")]
+	[SerializeField] bool isClick;
+	public bool IsClick { get { return isClick; } set { isClick = value; } }
 
 	public void GameStart()
 	{
